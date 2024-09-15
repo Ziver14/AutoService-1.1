@@ -238,5 +238,23 @@ namespace AutoService
                 }
             }
         }
+
+        static public void AddMechanic(int number,string name)
+        {
+            string init_add = "INSERT INTO Mechanics (number, Name) VALUES (@Number, @Name);";
+            using (SQLiteConnection conn = new SQLiteConnection(path))
+            {
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = init_add;
+                    cmd.Parameters.AddWithValue("@Number", number);
+                    cmd.Parameters.AddWithValue("@Name", name);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

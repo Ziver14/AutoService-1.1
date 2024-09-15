@@ -93,6 +93,23 @@ namespace AutoService
             }
         }
 
+        private void btnAddMechanic_Click(object sender, EventArgs e)
+        {
+            // Создание и отображение формы ввода данных
+            using (InPutForm inputForm = new InPutForm())
+            {
+                //Поверяем открытие окна ввода данных
+                if (inputForm.ShowDialog() == DialogResult.OK)
+                {
+                    string name = inputForm.MechanicName;
+                    int number = inputForm.MechanicNumber;
 
+                    DBWork.AddMechanic(number, name);
+                    MessageBox.Show("Механик успешно добавлен");
+                    //Обновляем список механиков
+                    FillMechanicsNames();
+                }
+            }
+        }
     }
 }
